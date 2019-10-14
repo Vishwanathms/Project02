@@ -16,6 +16,9 @@ pipeline {
             }
         }
         stage ("Build the Docker Image") {
+            input {
+                    message 'Can we proceed with Image build'
+            }
             steps {
                 sh "docker build . -t vishwacloudlab/tomcat-b15"
             }
@@ -43,6 +46,7 @@ pipeline {
             steps {
                 sh "docker rm cont01 -f"
                 sh "docker image rmi vishwacloudlab/tomcat-b15 -f"
+                sh "mvn clean"
             }
         }
     }
