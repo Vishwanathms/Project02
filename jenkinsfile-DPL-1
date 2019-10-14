@@ -1,5 +1,9 @@
 pipeline {
     agent { label 'Java' }
+    tools {
+        maven 'maven-3.6.2'
+        jdk 'JDK1.8'
+    }
     stages { 
         stage ("SCM Checkin-1") {
             steps {
@@ -7,10 +11,6 @@ pipeline {
             }
         }
         stage ("maven build") {
-            tools {
-                maven 'maven-3.6.2'
-                jdk 'JDK1.8'
-            }
             steps {
                 sh "mvn package"
             }
